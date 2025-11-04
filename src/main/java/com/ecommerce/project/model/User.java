@@ -16,9 +16,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "users",
         uniqueConstraints = {
-        @UniqueConstraint(columnNames = "username"),
-                @UniqueConstraint(columnNames = "username")})
-@ToString
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,23 +46,31 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
     @Setter
     @Getter
-    @ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
-                        joinColumns = @JoinColumn(name = "user_id"),
-                        inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles =  new HashSet<>();
-    @Setter
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
     @Getter
-    @ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @Setter
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_address",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id"))
     private List<Address> addresses = new ArrayList<>();
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST,CascadeType.MERGE},
-                                    orphanRemoval = true)
-    private Set<Product> products;
 
+    @ToString.Exclude
+    @OneToOne(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private Cart cart;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            orphanRemoval = true)
+    private Set<Product> products;
 }
