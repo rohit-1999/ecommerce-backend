@@ -16,7 +16,7 @@ This project is a full-featured e-commerce application built using Spring Boot, 
 
 💬 RESTful APIs for seamless integration with frontend
 
-🗄️ MySQL Database Integration using JPA/Hibernate
+🗄️ PostgreSQL Database Integration using JPA/Hibernate
 
 🧩 ModelMapper and DTO Layer for clean data transfer
 
