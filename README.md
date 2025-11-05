@@ -1,6 +1,6 @@
 🛍️ E-Commerce Platform
 
-This project is a full-featured e-commerce application built using Spring Boot, Spring Security (JWT), and MySQL. It supports Customer, Admin, and Seller roles with dedicated functionalities for each.
+This project is a full-featured e-commerce application built using Spring Boot, Spring Security (JWT), and PostgreSQL. It supports Customer, Admin, and Seller roles with dedicated functionalities for each.
 
 🔑 Key Features:
 
